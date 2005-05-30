@@ -1,12 +1,12 @@
 Summary:	Documentation Utilities
 Summary(pl):	Narzêdzia do tworzenia dokumentacji
 Name:		docutils
-Version:	0.3.7
-Release:	2
+Version:	0.3.9
+Release:	1
 License:	Public Domain, BSD, GPL (see COPYING.txt)
 Group:		Development/Tools
 Source0:	http://dl.sourceforge.net/docutils/%{name}-%{version}.tar.gz
-# Source0-md5:	fdd192d62bf5aebac6258a7ae8af5123
+# Source0-md5:	3b6727e4f53e88ae7cea7c296694fc6c
 URL:		http://docutils.sourceforge.net/
 BuildRequires:	python-devel
 %pyrequires_eq	python-libs
@@ -38,6 +38,7 @@ python setup.py install \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -55,7 +56,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitescriptdir}/%{name}/readers/python
 %dir %{py_sitescriptdir}/%{name}/writers
 %dir %{py_sitescriptdir}/%{name}/transforms
-%{py_sitescriptdir}/*.py[oc]
 %{py_sitescriptdir}/%{name}/*.py[oc]
 %{py_sitescriptdir}/%{name}/languages/*.py[oc]
 %{py_sitescriptdir}/%{name}/parsers/*.py[oc]
