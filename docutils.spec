@@ -38,6 +38,7 @@ python setup.py install \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
+install tools/rst2newlatex.py tools/rst2xml.py $RPM_BUILD_ROOT%{_bindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -56,6 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitescriptdir}/%{name}/readers/python
 %dir %{py_sitescriptdir}/%{name}/writers
 %dir %{py_sitescriptdir}/%{name}/transforms
+%{py_sitescriptdir}/*.py[oc]
 %{py_sitescriptdir}/%{name}/*.py[oc]
 %{py_sitescriptdir}/%{name}/languages/*.py[oc]
 %{py_sitescriptdir}/%{name}/parsers/*.py[oc]
