@@ -1,5 +1,5 @@
 Summary:	Documentation Utilities
-Summary(pl):	Narzêdzia do tworzenia dokumentacji
+Summary(pl.UTF-8):   NarzÄ™dzia do tworzenia dokumentacji
 Name:		docutils
 Version:	0.4
 Release:	1
@@ -19,10 +19,10 @@ autodocumentation of Python modules. Includes reStructuredText, the
 easy to read, easy to use, what-you-see-is-what-you-get plaintext
 markup language.
 
-%description -l pl
-Narzêdzia do ogólnego i specjalnego dokumentowania, w³±czaj±c
-autodokumentacjê modu³ów pythona. Zawiera reStructuredText, ³atwy do
-odczytania, ³atwy w u¿yciu, WYSIWYG jêzyk opisu tekstu.
+%description -l pl.UTF-8
+NarzÄ™dzia do ogÃ³lnego i specjalnego dokumentowania, wÅ‚Ä…czajÄ…c
+autodokumentacjÄ™ moduÅ‚Ã³w pythona. Zawiera reStructuredText, Å‚atwy do
+odczytania, Å‚atwy w uÅ¼yciu, WYSIWYG jÄ™zyk opisu tekstu.
 
 %prep
 %setup -q
