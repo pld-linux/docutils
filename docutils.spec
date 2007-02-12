@@ -1,5 +1,5 @@
 Summary:	Documentation Utilities
-Summary(pl.UTF-8):   Narzędzia do tworzenia dokumentacji
+Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
 Name:		docutils
 Version:	0.4
 Release:	1
