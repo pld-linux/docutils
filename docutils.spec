@@ -1,8 +1,4 @@
 #
-# TODO:
-#	- check if ".py" suffix can be striped from the %{_bindir} scripts
-#	  (*.py in %{_bindir} is generally a very bad idea)
-#
 Summary:	Documentation Utilities
 Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
 Name:		docutils
@@ -66,8 +62,12 @@ python setup.py install \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
+for f in $RPM_BUILD_ROOT%{_bindir}/*.py ; do
+	mv "${f}" "${f%.py}"
+done
+
 install extras/roman.py $RPM_BUILD_ROOT%{py_sitescriptdir}
-install tools/rstpep2html.py $RPM_BUILD_ROOT%{_bindir}
+
 %py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}
 %py_postclean
