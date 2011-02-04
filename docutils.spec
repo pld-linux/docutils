@@ -41,7 +41,7 @@ language.
 
 This package provides the Docutils python modules.
 
-%description -l pl.UTF-8 -n python-%{name}
+%description -n python-%{name} -l pl.UTF-8
 Docutils to narzędzia do ogólnego i specjalnego dokumentowania, włączając
 autodokumentację modułów pythona. Zawiera reStructuredText, łatwy do
 odczytania, łatwy w użyciu, WYSIWYG język opisu tekstu.
