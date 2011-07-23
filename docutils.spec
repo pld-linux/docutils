@@ -1,4 +1,3 @@
-#
 Summary:	Documentation Utilities
 Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
 Name:		docutils
@@ -37,18 +36,18 @@ Group:          Development/Languages/Python
 
 %description -n python-%{name}
 Docutils are utilities for general- and special-purpose documentation,
-including autodocumentation of Python modules. Includes reStructuredText, the
-easy to read, easy to use, what-you-see-is-what-you-get plaintext markup
-language.
+including autodocumentation of Python modules. Includes
+reStructuredText, the easy to read, easy to use,
+what-you-see-is-what-you-get plaintext markup language.
 
-This package provides the Docutils python modules.
+This package provides the Docutils modules for Python 2.
 
 %description -n python-%{name} -l pl.UTF-8
-Docutils to narzędzia do ogólnego i specjalnego dokumentowania, włączając
-autodokumentację modułów pythona. Zawiera reStructuredText, łatwy do
-odczytania, łatwy w użyciu, WYSIWYG język opisu tekstu.
+Docutils to narzędzia do ogólnego i specjalnego dokumentowania,
+włączając autodokumentację modułów pythona. Zawiera reStructuredText,
+łatwy do odczytania, łatwy w użyciu, język opisu tekstu WYSIWYG.
 
-Ten pakiet dostarcza modułów pythona Docutils.
+Ten pakiet dostarcza moduły Docutils dla Pythona 2.
 
 %package -n python3-%{name}
 Summary:        Text documents processing modules for Python
@@ -58,50 +57,43 @@ Group:          Development/Languages/Python
 
 %description -n python3-%{name}
 Docutils are utilities for general- and special-purpose documentation,
-including autodocumentation of Python modules. Includes reStructuredText, the
-easy to read, easy to use, what-you-see-is-what-you-get plaintext markup
-language.
+including autodocumentation of Python modules. Includes
+reStructuredText, the easy to read, easy to use,
+what-you-see-is-what-you-get plaintext markup language.
 
-This package provides the Docutils python modules.
+This package provides the Docutils modules for Python 3.
 
 %description -n python3-%{name} -l pl.UTF-8
-Docutils to narzędzia do ogólnego i specjalnego dokumentowania, włączając
-autodokumentację modułów pythona. Zawiera reStructuredText, łatwy do
-odczytania, łatwy w użyciu, WYSIWYG język opisu tekstu.
+Docutils to narzędzia do ogólnego i specjalnego dokumentowania,
+włączając autodokumentację modułów pythona. Zawiera reStructuredText,
+łatwy do odczytania, łatwy w użyciu, język opisu tekstu WYSIWYG.
 
-Ten pakiet dostarcza modułów pythona Docutils.
+Ten pakiet dostarcza moduły Docutils dla Pythona 3.
 
 %prep
 %setup -q
 
 %build
-%{__python} setup.py build -b build-2 config
-%{__python} setup.py build -b build-2
-
-%{__python3} setup.py build -b build-3 config
-%{__python3} setup.py build -b build-3
+%{__python} setup.py config build -b build-2
+%{__python3} setup.py config build -b build-3
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__python} setup.py \
-    build -b build-2 \
-    install \
+%{__python} setup.py build -b build-2 install \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
 for f in $RPM_BUILD_ROOT%{_bindir}/*.py ; do
-	mv "${f}" "${f%.py}-%{py_ver}"
+	mv "${f}" "${f%.py}"
 done
 
-%{__python3} setup.py \
-    build -b build-3 \
-    install \
+%{__python3} setup.py build -b build-3 install \
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
 for f in $RPM_BUILD_ROOT%{_bindir}/*.py ; do
-	mv "${f}" "${f%.py}-%{py3_ver}"
+	mv "${f}" "${f%.py}-3"
 done
 
 install extras/roman.py $RPM_BUILD_ROOT%{py_sitescriptdir}
@@ -117,22 +109,26 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc PKG-INFO *.txt docs
-%attr(755,root,root) %{_bindir}/*-2.?
-
-%files -n docutils
-%defattr(644,root,root,755)
-%doc PKG-INFO *.txt docs
-%attr(755,root,root) %{_bindir}/*-3.?
+%attr(755,root,root) %{_bindir}/rst2html
+%attr(755,root,root) %{_bindir}/rst2latex
+%attr(755,root,root) %{_bindir}/rst2man
+%attr(755,root,root) %{_bindir}/rst2odt
+%attr(755,root,root) %{_bindir}/rst2odt_prepstyles
+%attr(755,root,root) %{_bindir}/rst2pseudoxml
+%attr(755,root,root) %{_bindir}/rst2s5
+%attr(755,root,root) %{_bindir}/rst2xetex
+%attr(755,root,root) %{_bindir}/rst2xml
+%attr(755,root,root) %{_bindir}/rstpep2html
 
 %files -n python-%{name}
 %defattr(644,root,root,755)
-%{py_sitescriptdir}/*.py[oc]
-%{py_sitescriptdir}/%{name}
-%{py_sitescriptdir}/%{name}*.egg-info
+%{py_sitescriptdir}/roman.py[oc]
+%{py_sitescriptdir}/docutils
+%{py_sitescriptdir}/docutils-%{version}-py*.egg-info
 
 %files -n python3-%{name}
 %defattr(644,root,root,755)
-%{py3_sitescriptdir}/*.py
-%{py3_sitescriptdir}/__pycache__
-%{py3_sitescriptdir}/%{name}
-%{py3_sitescriptdir}/%{name}*.egg-info
+%{py3_sitescriptdir}/roman.py
+%{py3_sitescriptdir}/__pycache__/roman.cpython-*.py[co]
+%{py3_sitescriptdir}/docutils
+%{py3_sitescriptdir}/docutils-%{version}-py*.egg-info
