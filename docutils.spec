@@ -5,12 +5,12 @@ Version:	0.8
 Release:	1
 License:	Public Domain, BSD, GPL (see COPYING.txt)
 Group:		Development/Tools
-Source0:	http://dl.sourceforge.net/docutils/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
 # Source0-md5:	f57474b69bfbf0eb608706a104f92dda
 URL:		http://docutils.sourceforge.net/
-BuildRequires:	python-devel
-BuildRequires:	python3-2to3
-BuildRequires:	python3-devel
+BuildRequires:	python-devel >= 2.3
+BuildRequires:	python3-2to3 >= 3.2
+BuildRequires:	python3-devel >= 3.2
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 Requires:	python-%{name} = %{version}-%{release}
@@ -24,13 +24,13 @@ easy to read, easy to use, what-you-see-is-what-you-get plaintext
 markup language.
 
 %description -l pl.UTF-8
-Narzędzia do ogólnego i specjalnego dokumentowania, włączając
-autodokumentację modułów pythona. Zawiera reStructuredText, łatwy do
-odczytania, łatwy w użyciu, WYSIWYG język opisu tekstu.
+Narzędzia do dokumentowania ogólnego i specjalnego zastosowania, w tym
+autodokumentacji modułów Pythona. Zawierają reStructuredText - łatwy
+do odczytania, łatwy w użyciu język opisu tekstu typu WYSIWYG.
 
 %package -n python-%{name}
-Summary:        Text documents processing modules for Python
-Summary(pl.UTF-8):      Moduły Pythona do przetwarzania dokumentów tekstowych
+Summary:        Text documents processing modules for Python 2.x
+Summary(pl.UTF-8):      Moduły Pythona 2.x do przetwarzania dokumentów tekstowych
 Group:          Development/Languages/Python
 %pyrequires_eq	python-libs
 
@@ -43,17 +43,16 @@ what-you-see-is-what-you-get plaintext markup language.
 This package provides the Docutils modules for Python 2.
 
 %description -n python-%{name} -l pl.UTF-8
-Docutils to narzędzia do ogólnego i specjalnego dokumentowania,
-włączając autodokumentację modułów pythona. Zawiera reStructuredText,
-łatwy do odczytania, łatwy w użyciu, język opisu tekstu WYSIWYG.
+Narzędzia do dokumentowania ogólnego i specjalnego zastosowania, w tym
+autodokumentacji modułów Pythona. Zawierają reStructuredText - łatwy
+do odczytania, łatwy w użyciu język opisu tekstu typu WYSIWYG.
 
 Ten pakiet dostarcza moduły Docutils dla Pythona 2.
 
 %package -n python3-%{name}
-Summary:        Text documents processing modules for Python
-Summary(pl.UTF-8):      Moduły Pythona do przetwarzania dokumentów tekstowych
+Summary:        Text documents processing modules for Python 3.x
+Summary(pl.UTF-8):      Moduły Pythona 3.x do przetwarzania dokumentów tekstowych
 Group:          Development/Languages/Python
-%pyrequires_eq	python-libs
 
 %description -n python3-%{name}
 Docutils are utilities for general- and special-purpose documentation,
@@ -64,9 +63,9 @@ what-you-see-is-what-you-get plaintext markup language.
 This package provides the Docutils modules for Python 3.
 
 %description -n python3-%{name} -l pl.UTF-8
-Docutils to narzędzia do ogólnego i specjalnego dokumentowania,
-włączając autodokumentację modułów pythona. Zawiera reStructuredText,
-łatwy do odczytania, łatwy w użyciu, język opisu tekstu WYSIWYG.
+Narzędzia do dokumentowania ogólnego i specjalnego zastosowania, w tym
+autodokumentacji modułów Pythona. Zawierają reStructuredText - łatwy
+do odczytania, łatwy w użyciu język opisu tekstu typu WYSIWYG.
 
 Ten pakiet dostarcza moduły Docutils dla Pythona 3.
 
