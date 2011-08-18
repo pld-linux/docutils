@@ -98,6 +98,8 @@ done
 install extras/roman.py $RPM_BUILD_ROOT%{py_sitescriptdir}
 install extras/roman.py $RPM_BUILD_ROOT%{py3_sitescriptdir}
 2to3-3.2 -n -w $RPM_BUILD_ROOT%{py3_sitescriptdir}/roman.py
+# clean some 2to3 leftovers
+%{__rm} -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/{test,tools}
 
 %py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}
