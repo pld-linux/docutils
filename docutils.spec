@@ -2,15 +2,16 @@ Summary:	Documentation Utilities
 Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
 Name:		docutils
 Version:	0.8.1
-Release:	2
+Release:	3
 License:	Public Domain, BSD, GPL (see COPYING.txt)
 Group:		Development/Tools
 Source0:	http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
 # Source0-md5:	2ecf8ba3ece1be1ed666150a80c838c8
 URL:		http://docutils.sourceforge.net/
 BuildRequires:	python-devel >= 2.3
-BuildRequires:	python3-2to3 >= 3.2
-BuildRequires:	python3-devel >= 3.2
+BuildRequires:	python3-2to3 >= 3.3
+BuildRequires:	python3-2to3 < 3.4
+BuildRequires:	python3-devel >= 3.3
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 Requires:	python-%{name} = %{version}-%{release}
@@ -97,7 +98,7 @@ done
 
 install extras/roman.py $RPM_BUILD_ROOT%{py_sitescriptdir}
 install extras/roman.py $RPM_BUILD_ROOT%{py3_sitescriptdir}
-2to3-3.2 -n -w $RPM_BUILD_ROOT%{py3_sitescriptdir}/roman.py
+2to3-3.3 -n -w $RPM_BUILD_ROOT%{py3_sitescriptdir}/roman.py
 # clean some 2to3 leftovers
 %{__rm} -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/{test,tools}
 
