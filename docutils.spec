@@ -1,12 +1,12 @@
 Summary:	Documentation Utilities
 Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
 Name:		docutils
-Version:	0.8.1
-Release:	4
+Version:	0.10
+Release:	1
 License:	Public Domain, BSD, GPL (see COPYING.txt)
 Group:		Development/Tools
 Source0:	http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
-# Source0-md5:	2ecf8ba3ece1be1ed666150a80c838c8
+# Source0-md5:	d8d4660c08302c791b2d71a155a2f4bc
 URL:		http://docutils.sourceforge.net/
 BuildRequires:	python-devel >= 2.3
 BuildRequires:	python3-2to3 >= 1:3.3
@@ -49,6 +49,18 @@ autodokumentacji modułów Pythona. Zawierają reStructuredText - łatwy
 do odczytania, łatwy w użyciu język opisu tekstu typu WYSIWYG.
 
 Ten pakiet dostarcza moduły Docutils dla Pythona 2.
+
+%package 3
+Summary:        Documentation Utilities for Python 3.x
+Group:		Development/Tools
+
+%description 3
+Utilities for general- and special-purpose documentation, including
+autodocumentation of Python modules. Includes reStructuredText, the
+easy to read, easy to use, what-you-see-is-what-you-get plaintext
+markup language.
+
+This package provides the Docutils for Python 3.
 
 %package -n python3-%{name}
 Summary:        Text documents processing modules for Python 3.x
@@ -96,12 +108,6 @@ for f in $RPM_BUILD_ROOT%{_bindir}/*.py ; do
 	mv "${f}" "${f%.py}-3"
 done
 
-install extras/roman.py $RPM_BUILD_ROOT%{py_sitescriptdir}
-install extras/roman.py $RPM_BUILD_ROOT%{py3_sitescriptdir}
-2to3-3.3 -n -w $RPM_BUILD_ROOT%{py3_sitescriptdir}/roman.py
-# clean some 2to3 leftovers
-%{__rm} -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/{test,tools}
-
 %py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}
 %py_postclean
@@ -123,15 +129,17 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/rst2xml
 %attr(755,root,root) %{_bindir}/rstpep2html
 
+%files 3
+%defattr(644,root,root,755)
+%doc PKG-INFO *.txt docs
+%attr(755,root,root) %{_bindir}/rst*-3
+
 %files -n python-%{name}
 %defattr(644,root,root,755)
-%{py_sitescriptdir}/roman.py[oc]
 %{py_sitescriptdir}/docutils
 %{py_sitescriptdir}/docutils-%{version}-py*.egg-info
 
 %files -n python3-%{name}
 %defattr(644,root,root,755)
-%{py3_sitescriptdir}/roman.py
-%{py3_sitescriptdir}/__pycache__/roman.cpython-*.py[co]
 %{py3_sitescriptdir}/docutils
 %{py3_sitescriptdir}/docutils-%{version}-py*.egg-info
