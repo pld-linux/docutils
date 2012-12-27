@@ -52,7 +52,9 @@ Ten pakiet dostarcza moduły Docutils dla Pythona 2.
 
 %package 3
 Summary:        Documentation Utilities for Python 3.x
+Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji dla Pythona 3.x
 Group:		Development/Tools
+Requires:	python3-%{name} = %{version}-%{release}
 
 %description 3
 Utilities for general- and special-purpose documentation, including
@@ -61,6 +63,13 @@ easy to read, easy to use, what-you-see-is-what-you-get plaintext
 markup language.
 
 This package provides the Docutils for Python 3.
+
+%description 3 -l pl.UTF-8
+Narzędzia do dokumentowania ogólnego i specjalnego zastosowania, w tym
+autodokumentacji modułów Pythona. Zawierają reStructuredText - łatwy
+do odczytania, łatwy w użyciu język opisu tekstu typu WYSIWYG.
+
+Ten pakiet zawiera Docutils dla Pythona 3.
 
 %package -n python3-%{name}
 Summary:        Text documents processing modules for Python 3.x
