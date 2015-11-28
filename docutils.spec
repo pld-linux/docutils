@@ -101,17 +101,13 @@ Ten pakiet dostarcza moduły Docutils dla Pythona 3.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__python} setup.py build -b build-2 install \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
+%py_install
 
 for f in $RPM_BUILD_ROOT%{_bindir}/*.py ; do
 	mv "${f}" "${f%.py}"
 done
 
-%{__python3} setup.py build -b build-3 install \
-	--optimize=2 \
-	--root=$RPM_BUILD_ROOT
+%py3_install
 
 for f in $RPM_BUILD_ROOT%{_bindir}/*.py ; do
 	mv "${f}" "${f%.py}-3"
