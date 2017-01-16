@@ -1,19 +1,28 @@
+#
+# Conditional build:
+%bcond_without	python2	# CPython 2.x version
+%bcond_without	python3	# CPython 3.x version
+
 Summary:	Documentation Utilities
 Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
 Name:		docutils
-Version:	0.12
-Release:	7
+Version:	0.13.1
+Release:	1
 License:	Public Domain, BSD, GPL (see COPYING.txt)
 Group:		Development/Tools
 Source0:	http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
-# Source0-md5:	4622263b62c5c771c03502afa3157768
+# Source0-md5:	ea4a893c633c788be9b8078b6b305d53
 URL:		http://docutils.sourceforge.net/
+%if %{with python2}
 BuildRequires:	python-devel >= 2.3
+%endif
+%if %{with python3}
 BuildRequires:	python3-2to3 >= 1:3.6
 BuildRequires:	python3-2to3 < 1:3.7
 BuildRequires:	python3-devel >= 3.6
+%endif
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.710
+BuildRequires:	rpmbuild(macros) >= 1.714
 Requires:	python-%{name} = %{version}-%{release}
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -95,35 +104,44 @@ Ten pakiet dostarcza moduły Docutils dla Pythona 3.
 %setup -q
 
 %build
+%if %{with python2}
 %{__python} setup.py config build -b build-2
+%endif
+
+%if %{with python3}
 %{__python3} setup.py config build -b build-3
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with python2}
 %py_install
 
 for f in $RPM_BUILD_ROOT%{_bindir}/*.py ; do
-	mv "${f}" "${f%.py}"
+	%{__mv} "${f}" "${f%.py}"
 done
 
+%py_postclean
+%endif
+
+%if %{with python3}
 %py3_install
 
 for f in $RPM_BUILD_ROOT%{_bindir}/*.py ; do
-	mv "${f}" "${f%.py}-3"
+	%{__mv} "${f}" "${f%.py}-3"
 done
-
-%py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}
-%py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}
-%py_postclean
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with python2}
 %files
 %defattr(644,root,root,755)
 %doc PKG-INFO *.txt docs
 %attr(755,root,root) %{_bindir}/rst2html
+%attr(755,root,root) %{_bindir}/rst2html5
 %attr(755,root,root) %{_bindir}/rst2latex
 %attr(755,root,root) %{_bindir}/rst2man
 %attr(755,root,root) %{_bindir}/rst2odt
@@ -134,17 +152,20 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/rst2xml
 %attr(755,root,root) %{_bindir}/rstpep2html
 
+%files -n python-%{name}
+%defattr(644,root,root,755)
+%{py_sitescriptdir}/docutils
+%{py_sitescriptdir}/docutils-%{version}-py*.egg-info
+%endif
+
+%if %{with python3}
 %files 3
 %defattr(644,root,root,755)
 %doc PKG-INFO *.txt docs
 %attr(755,root,root) %{_bindir}/rst*-3
 
-%files -n python-%{name}
-%defattr(644,root,root,755)
-%{py_sitescriptdir}/docutils
-%{py_sitescriptdir}/docutils-%{version}-py*.egg-info
-
 %files -n python3-%{name}
 %defattr(644,root,root,755)
 %{py3_sitescriptdir}/docutils
 %{py3_sitescriptdir}/docutils-%{version}-py*.egg-info
+%endif
