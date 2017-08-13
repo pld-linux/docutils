@@ -6,12 +6,12 @@
 Summary:	Documentation Utilities
 Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
 Name:		docutils
-Version:	0.13.1
+Version:	0.14
 Release:	1
 License:	Public Domain, BSD, GPL (see COPYING.txt)
 Group:		Development/Tools
 Source0:	http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
-# Source0-md5:	ea4a893c633c788be9b8078b6b305d53
+# Source0-md5:	c53768d63db3873b7d452833553469de
 URL:		http://docutils.sourceforge.net/
 %if %{with python2}
 BuildRequires:	python-devel >= 2.3
@@ -141,6 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc PKG-INFO *.txt docs
 %attr(755,root,root) %{_bindir}/rst2html
+%attr(755,root,root) %{_bindir}/rst2html4
 %attr(755,root,root) %{_bindir}/rst2html5
 %attr(755,root,root) %{_bindir}/rst2latex
 %attr(755,root,root) %{_bindir}/rst2man
