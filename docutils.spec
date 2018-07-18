@@ -2,6 +2,7 @@
 # Conditional build:
 %bcond_without	python2	# CPython 2.x version
 %bcond_without	python3	# CPython 3.x version
+%bcond_without	tests	# unit tests
 
 Summary:	Documentation Utilities
 Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
@@ -14,12 +15,12 @@ Source0:	http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
 # Source0-md5:	c53768d63db3873b7d452833553469de
 URL:		http://docutils.sourceforge.net/
 %if %{with python2}
-BuildRequires:	python-devel >= 2.3
+BuildRequires:	python-devel >= 1:2.4
 %endif
 %if %{with python3}
-BuildRequires:	python3-2to3 >= 1:3.6
+BuildRequires:	python3-2to3 >= 1:3.7
 BuildRequires:	python3-2to3 < 1:3.8
-BuildRequires:	python3-devel >= 3.7
+BuildRequires:	python3-devel >= 1:3.7
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -106,10 +107,20 @@ Ten pakiet dostarcza moduły Docutils dla Pythona 3.
 %build
 %if %{with python2}
 %{__python} setup.py config build -b build-2
+
+%if %{with tests}
+PYTHONPATH=$(pwd)/build-2/lib \
+%{__python} test/alltests.py
+%endif
 %endif
 
 %if %{with python3}
 %{__python3} setup.py config build -b build-3
+
+%if %{with tests}
+PYTHONPATH=$(pwd)/build-3/lib \
+%{__python3} test3/alltests.py
+%endif
 %endif
 
 %install
