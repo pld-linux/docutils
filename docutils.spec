@@ -7,20 +7,19 @@
 Summary:	Documentation Utilities
 Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
 Name:		docutils
-Version:	0.14
-Release:	5
-License:	Public Domain, BSD, GPL (see COPYING.txt)
+Version:	0.15
+Release:	1
+License:	Public Domain, BSD, GPL v3 (see COPYING.txt)
 Group:		Development/Tools
 Source0:	http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
-# Source0-md5:	c53768d63db3873b7d452833553469de
+# Source0-md5:	f51729f19e70a9dc4837433193a5e798
 URL:		http://docutils.sourceforge.net/
 %if %{with python2}
-BuildRequires:	python-devel >= 1:2.4
+BuildRequires:	python-devel >= 1:2.6
 %endif
 %if %{with python3}
-BuildRequires:	python3-2to3 >= 1:3.8
-BuildRequires:	python3-2to3 < 1:3.9
-BuildRequires:	python3-devel >= 1:3.8
+BuildRequires:	python3-2to3 >= 1:3.4
+BuildRequires:	python3-devel >= 1:3.4
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -150,7 +149,6 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc PKG-INFO *.txt docs
 %attr(755,root,root) %{_bindir}/rst2html
 %attr(755,root,root) %{_bindir}/rst2html4
 %attr(755,root,root) %{_bindir}/rst2html5
@@ -166,6 +164,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n python-%{name}
 %defattr(644,root,root,755)
+%doc BUGS.txt COPYING.txt README.txt RELEASE-NOTES.txt THANKS.txt docs
 %{py_sitescriptdir}/docutils
 %{py_sitescriptdir}/docutils-%{version}-py*.egg-info
 %endif
@@ -173,11 +172,11 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files 3
 %defattr(644,root,root,755)
-%doc PKG-INFO *.txt docs
 %attr(755,root,root) %{_bindir}/rst*-3
 
 %files -n python3-%{name}
 %defattr(644,root,root,755)
+%doc BUGS.txt COPYING.txt README.txt RELEASE-NOTES.txt THANKS.txt docs
 %{py3_sitescriptdir}/docutils
 %{py3_sitescriptdir}/docutils-%{version}-py*.egg-info
 %endif
