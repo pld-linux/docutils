@@ -11,16 +11,19 @@ Version:	0.15.2
 Release:	1
 License:	Public Domain, BSD, GPL v3 (see COPYING.txt)
 Group:		Development/Tools
-# Source0:	http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
-Source0:	https://pypi.debian.net/%{name}/%{name}-%{version}.tar.gz
+# original URL, but only with major releases: http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
+#Source0Download: https://pypi.org/simple/docutils/
+Source0:	https://files.pythonhosted.org/packages/source/d/docutils/%{name}-%{version}.tar.gz
 # Source0-md5:	e26a308d8000b0bed7416a633217c676
 URL:		http://docutils.sourceforge.net/
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.6
+BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
 BuildRequires:	python3-2to3 >= 1:3.4
 BuildRequires:	python3-devel >= 1:3.4
+BuildRequires:	python3-setuptools
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
