@@ -15,15 +15,25 @@ Group:		Development/Tools
 #Source0Download: https://pypi.org/simple/docutils/
 Source0:	https://files.pythonhosted.org/packages/source/d/docutils/%{name}-%{version}.tar.gz
 # Source0-md5:	44952782107930ddfcd37ae48eee0857
+Patch0:		%{name}-py3.patch
 URL:		http://docutils.sourceforge.net/
 %if %{with python2}
-BuildRequires:	python-devel >= 1:2.6
+BuildRequires:	python-devel >= 1:2.7
 BuildRequires:	python-setuptools
+%if %{with tests}
+# py3 patch assumes python3 lexer is the default, as it is since pygments 2.5.0
+BuildRequires:	python-pygments >= 2.5.0
+# a few tests fail with _xmlplus implementation of xml
+BuildConflicts:	python-PyXML
+%endif
 %endif
 %if %{with python3}
-BuildRequires:	python3-2to3 >= 1:3.4
-BuildRequires:	python3-devel >= 1:3.4
+BuildRequires:	python3-devel >= 1:3.5
 BuildRequires:	python3-setuptools
+%if %{with tests}
+# py3 patch assumes python3 lexer is the default, as it is since pygments 2.5.0
+BuildRequires:	python3-pygments >= 2.5.0
+%endif
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -46,7 +56,7 @@ do odczytania, łatwy w użyciu język opisu tekstu typu WYSIWYG.
 Summary:        Text documents processing modules for Python 2.x
 Summary(pl.UTF-8):      Moduły Pythona 2.x do przetwarzania dokumentów tekstowych
 Group:          Development/Languages/Python
-%pyrequires_eq	python-libs
+Requires:	python-libs >= 1:2.7
 
 %description -n python-%{name}
 Docutils are utilities for general- and special-purpose documentation,
@@ -88,6 +98,7 @@ Ten pakiet zawiera Docutils dla Pythona 3.
 Summary:        Text documents processing modules for Python 3.x
 Summary(pl.UTF-8):      Moduły Pythona 3.x do przetwarzania dokumentów tekstowych
 Group:          Development/Languages/Python
+Requires:	python3-libs >= 1:3.5
 
 %description -n python3-%{name}
 Docutils are utilities for general- and special-purpose documentation,
@@ -106,6 +117,7 @@ Ten pakiet dostarcza moduły Docutils dla Pythona 3.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %if %{with python2}
@@ -122,7 +134,7 @@ PYTHONPATH=$(pwd)/build-2/lib \
 
 %if %{with tests}
 PYTHONPATH=$(pwd)/build-3/lib \
-%{__python3} test3/alltests.py
+%{__python3} test/alltests.py
 %endif
 %endif
 
