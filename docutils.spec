@@ -8,7 +8,7 @@ Summary:	Documentation Utilities
 Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
 Name:		docutils
 Version:	0.16
-Release:	3
+Release:	4
 License:	Public Domain, BSD, GPL v3 (see COPYING.txt)
 Group:		Development/Tools
 # original URL, but only with major releases: http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
@@ -37,7 +37,8 @@ BuildRequires:	python3-pygments >= 2.5.0
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
-Requires:	python-%{name} = %{version}-%{release}
+Requires:	python3-%{name} = %{version}-%{release}
+Obsoletes:	docutils-3 < 0.16-4
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -73,26 +74,26 @@ do odczytania, łatwy w użyciu język opisu tekstu typu WYSIWYG.
 
 Ten pakiet dostarcza moduły Docutils dla Pythona 2.
 
-%package 3
-Summary:        Documentation Utilities for Python 3.x
-Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji dla Pythona 3.x
+%package 2
+Summary:        Documentation Utilities for Python 2.x
+Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji dla Pythona 2.x
 Group:		Development/Tools
-Requires:	python3-%{name} = %{version}-%{release}
+Requires:	python-%{name} = %{version}-%{release}
 
-%description 3
+%description 2
 Utilities for general- and special-purpose documentation, including
 autodocumentation of Python modules. Includes reStructuredText, the
 easy to read, easy to use, what-you-see-is-what-you-get plaintext
 markup language.
 
-This package provides the Docutils for Python 3.
+This package provides the Docutils for Python 2.
 
-%description 3 -l pl.UTF-8
+%description 2 -l pl.UTF-8
 Narzędzia do dokumentowania ogólnego i specjalnego zastosowania, w tym
 autodokumentacji modułów Pythona. Zawierają reStructuredText - łatwy
 do odczytania, łatwy w użyciu język opisu tekstu typu WYSIWYG.
 
-Ten pakiet zawiera Docutils dla Pythona 3.
+Ten pakiet zawiera Docutils dla Pythona 2.
 
 %package -n python3-%{name}
 Summary:        Text documents processing modules for Python 3.x
@@ -145,7 +146,7 @@ rm -rf $RPM_BUILD_ROOT
 %py_install
 
 for f in $RPM_BUILD_ROOT%{_bindir}/*.py ; do
-	%{__mv} "${f}" "${f%.py}"
+	%{__mv} "${f}" "${f%.py}-2"
 done
 
 %py_postclean
@@ -155,14 +156,14 @@ done
 %py3_install
 
 for f in $RPM_BUILD_ROOT%{_bindir}/*.py ; do
-	%{__mv} "${f}" "${f%.py}-3"
+	%{__mv} "${f}" "${f%.py}"
 done
 %endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%if %{with python2}
+%if %{with python3}
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/rst2html
@@ -178,21 +179,21 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/rst2xml
 %attr(755,root,root) %{_bindir}/rstpep2html
 
-%files -n python-%{name}
-%defattr(644,root,root,755)
-%doc BUGS.txt COPYING.txt README.txt RELEASE-NOTES.txt THANKS.txt docs
-%{py_sitescriptdir}/docutils
-%{py_sitescriptdir}/docutils-%{version}-py*.egg-info
-%endif
-
-%if %{with python3}
-%files 3
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/rst*-3
-
 %files -n python3-%{name}
 %defattr(644,root,root,755)
 %doc BUGS.txt COPYING.txt README.txt RELEASE-NOTES.txt THANKS.txt docs
 %{py3_sitescriptdir}/docutils
 %{py3_sitescriptdir}/docutils-%{version}-py*.egg-info
+%endif
+
+%if %{with python2}
+%files 2
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/rst*-2
+
+%files -n python-%{name}
+%defattr(644,root,root,755)
+%doc BUGS.txt COPYING.txt README.txt RELEASE-NOTES.txt THANKS.txt docs
+%{py_sitescriptdir}/docutils
+%{py_sitescriptdir}/docutils-%{version}-py*.egg-info
 %endif
