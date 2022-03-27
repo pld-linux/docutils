@@ -8,7 +8,7 @@ Summary:	Documentation Utilities
 Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
 Name:		docutils
 Version:	0.18.1
-Release:	2
+Release:	3
 License:	Public Domain, BSD, GPL v3 (see COPYING.txt)
 Group:		Development/Tools
 # original URL, but only with major releases: http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
