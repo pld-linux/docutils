@@ -8,7 +8,7 @@ Summary:	Documentation Utilities
 Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
 Name:		docutils
 Version:	0.18.1
-Release:	4
+Release:	5
 License:	Public Domain, BSD, GPL v3 (see COPYING.txt)
 Group:		Development/Tools
 # original URL, but only with major releases: http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
@@ -57,6 +57,7 @@ Summary:        Text documents processing modules for Python 2.x
 Summary(pl.UTF-8):      Moduły Pythona 2.x do przetwarzania dokumentów tekstowych
 Group:          Development/Languages/Python
 Requires:	python-modules >= 1:2.7
+Requires:	python-pygments
 
 %description -n python-%{name}
 Docutils are utilities for general- and special-purpose documentation,
@@ -99,6 +100,7 @@ Summary:        Text documents processing modules for Python 3.x
 Summary(pl.UTF-8):      Moduły Pythona 3.x do przetwarzania dokumentów tekstowych
 Group:          Development/Languages/Python
 Requires:	python3-modules >= 1:3.5
+Requires:	python3-pygments
 
 %description -n python3-%{name}
 Docutils are utilities for general- and special-purpose documentation,
