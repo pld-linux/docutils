@@ -6,13 +6,14 @@ Summary:	Documentation Utilities
 Summary(pl.UTF-8):	Narzędzia do tworzenia dokumentacji
 Name:		docutils
 Version:	0.21.2
-Release:	3
+Release:	4
 License:	Public Domain, BSD, GPL v3 (see COPYING.txt)
 Group:		Development/Tools
 # original URL, but only with major releases: http://downloads.sourceforge.net/docutils/%{name}-%{version}.tar.gz
 #Source0Download: https://pypi.org/simple/docutils/
 Source0:	https://pypi.debian.net/docutils/%{name}-%{version}.tar.gz
 # Source0-md5:	c4064e1e0e3cd142951fd2b95b830874
+Patch0:		pygments-2.19.patch
 URL:		http://docutils.sourceforge.net/
 BuildRequires:	python3-build
 BuildRequires:	python3-devel >= 1:3.5
@@ -63,6 +64,7 @@ Ten pakiet dostarcza moduły Docutils dla Pythona 3.
 
 %prep
 %setup -q
+%patch -P0 -p2
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python3(\s|$),#!%{__python3}\1,' \
       docutils/__main__.py \
